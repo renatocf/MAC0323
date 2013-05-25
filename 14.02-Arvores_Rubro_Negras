@@ -1,0 +1,153 @@
+Árvores 2-3 e Árvores Rubro-Negras
+
+    AS árvores rubro-negras são mais vantajosas que as ABBs porque,
+com pouca quantidade de código a mais, teremos grandes vantagens.
+    Veremos as árvores 2-3 como objetos de estudo para a ideia
+por trás das árvores rubro-negras.
+
+ÁRVORES 2-3: versão auxiliar de árvore rubro-negra
+-------------> nós podem ter 2 ou 3 filhos
+
+ABB:       |   } Sempre tem 2 filhos, com 
+          (y)  } x <= y <= z em relação
+          / \  } às chaves dos elementos
+         x   z } 
+
+A2-3:      |        |    } 
+          (y)     (w y)  } As árvores 2-3 podem ter 2 tipos de 
+          / \     / | \  } nós: o 2-nó (com 2 filhos e 1 elemento
+         x   z   v  x  z } no nó, que age como uma ABB) ou um 3-nó
+         2-nó     3-nó   } (com 3 filhos e 2 elementos no nó).
+
+        A 2-nó da árvore 2-3 segue a regra: x ≤ y ≤ z (como ABBs)
+        A 3-nó da árvore 2-3 segue a regra: v ≤ w ≤ x ≤ y ≤ z 
+        Sempre em relação às chaves.
+
+CRUCIAL: nossas árvores 2-3 serão sempre PERFEITAMENTE BALANCEADAS
+≡ todas os ponteiros para 'z' estarão à mesma distânca da raiz.
+
+EX:               (M)          /\  5 2-nó
+                  / \          ||  3 3-nó
+                 /   \         || 
+                /     \        ||  distãncia: 2
+            (E J)      (R)     ||  
+            / | \      / \     || 
+       (A C) (H) (L) (P) (S X) || 
+       / | \ / \ / \ / \ / | \ \/ 
+
+Podemos imaginar facilmente a implementação destas árvores, pois 
+teríamos 2 estruturas (ou 1 com espaços vazios, mas seria mais 
+custoso). Podemos pensar nos algoritmos sovre estas árvores:
+
+A condição para que uma árvores seja 2-3 faz com que a árvore
+sempre seja logarítmica, pois se não cumprirmos tal condição,
+não teremos os ponteiros sempre à mesma altura.
+
+Se considerarmos o pior caso de árvores 2-3, com apenas 2-nós,
+teremos que ela terá altula lg_2(N):
+          ( )       } 
+          / \       } Esta condição só se cumpre se
+         /   \      } a árvore funcionar como uma ABB completa
+      ( )     ( )   } (com todos os nós)
+      / \     / \   } 
+    ( ) ( ) ( ) ( ) } 
+
+Se tivéssemos apenas 3-nó, seria ainda melhor: teríamos uma altura
+de lg_3(N) (o que não faz tanta diferença, apenas de uma constante
+de lg_2(3), mas ainda assim, pode ser melhor que lg(2)).
+
+BUSCA
+    * Busca de H (sucesso)
+    * Busca de B (insucesso)
+    São análogos, mas precisamos ter algumas mudanças para o 3-nó,
+    quando temos de comparar a query com 2 elementos, e não 3.
+
+INSERÇÃO
+    Temos vários tipos de casos:
+    * Inserção em uma árvore com APENAS um 3-nó:
+    
+                       |    +S      |          |
+                     (A E) ----> (A E S) ↔    (E)
+                     / | \       / | | \      / \
+                                            (A) (S)
+                                            / \ / \
+    
+      Criamos, temporariamente, uma árvore 4-nó. Como ela resperia a 
+      mesma regra de uma 2-nó, temos que podemos trocá-la.
+    
+    * Inserção em um 2-nó:
+    
+                              |   +k    |
+                             (L) ---> (k L)
+                             / \      / | \
+    
+      Seguindo os mesmos princípios de acima, encontramos a mudança
+      deste elemento.
+    
+    * Inserção em um 2-nó na parte inferior da árvore:
+                                                   ,..........,
+           (R)                 (R)               (R:  X)      :
+           / \         +Z      / \               / :  | \     :
+             (S X)    ---->      (S X Z)   ↔    /  :  |  \    :
+             / | \               / | | \           : (S)  (Z) : 
+          [ ] [ ] [ ]          [] [] [] []         : / \  / \ :
+                                                   :[] [][] []:
+                                                   '¨¨¨¨¨¨¨¨¨¨̈́'
+       Nós reexpandimos como o caso antigo, porém --^^^^^^^^^^
+       dessa vez, se o pai for um 3-nó, ele se 
+       transforma um 3-nó.
+      
+      Novamente, tentamos forçar a construção de um '4-nó'. Mas para
+      manter a regra, NÃO podemos, de modo algum, reexpandir como no
+      1º item (em que estávamos no meio). Como a árvore acima é um
+      2-nó, ele pode receber o que seria a expansão (e que ficaria 
+      como filho) dentro do seu nó, tornando-se um 3-nó. (também 
+      podemos pensar que essa representação é possível por causa da
+      equivalência nas comparações entre chaves).
+    
+    * Inserção em um 2-nó que vai subindo na árvore:
+    
+            (M)                  (M)               (M)            (E M) 
+            / \                  / \               / \            / | \ 
+        (E J)     +D         (E J)           (C E J)          (C J)   
+        / | \    ---->       / | \   ↔       / | | \   ↔      / | \   
+    (A C)              (A C D)           (A D)            (A D)       
+    / | \              / | | \           / | \            / | \       
+  [ ][ ][ ]          [] [] [] []       [ ][ ][ ]        [ ][ ][ ]
+    
+      Neste caso, percebemos uma RECURSÃO no processo, em que quando
+      inserimos num 3-nó, vamos subindo mais e mais pela árvore, se-
+      guindo a regra mostrada no item anterior: a expansão que
+      ocorreria em nosso exemplo de uma árvore com apenas 1 elemento
+      (formando um 4-nó) tem seu elemento central que sobe. Quando
+      isto acontece, e temos um 3-nó, geramos um 4-nó. Repete-se o 
+      processo até termos um 2-nó, que vira um 3-nó.
+    
+  * Inserção em um 2-nó em que todos os pais (inclusive a raiz) são
+    3-nós:
+    
+                   (E J)                       (E J)    
+                   / | \                       / | \
+                  /  |  \                     /  |  \     
+                 /   |   \      +D           /   |   \    
+                /    |    \    ---->        /    |    \     ↔
+            (A C)   (H)   (L)         (A C D)   (H)   (L)
+            / | \   / \   / \         / | | \   / \   / \
+          [] [] [] [] [] [] []       [][] [][] [] [] [] []
+        
+               (C   E  J)                  (E)      
+               / |    | \                 /  \
+              /  |    |  \               /    \      
+             /   |    |   \    ↔        /      \     
+           (A)  (D)  (H)  (L)         (C)      (J)  
+           / \  / \  / \  / \        /  \      /  \  
+          [] [][] [][] [][] []     (A)  (C)  (H)  (L)
+                                   / \  / \  / \  / \ 
+                                  [] [][] [][] [][] []
+          
+    Este é o único caso em que a árvore cresce, mas NÃO para BAIXO,
+    mas sim para CIMA, e sempre conservamos a propriedade de altura
+    logarítmica. 
+    Esta inserção é muito boa, pois no MÁXIMO temos que descer a 
+    árvore buscando as chaves (lg(N)) e temos de fazer as transfor-
+    mações mostradas (lg(N)). Logo, é uma inserção LOGARÍTMICA.

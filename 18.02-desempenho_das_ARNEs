@@ -1,0 +1,18 @@
+DESEMPENHO DAS ARNEs
+
+Com ARNEs podemos implementar uma tabela de
+símbolos [ORDENADA] em que as operações de 
+inserção, busca e remoção custam O(lg N)
+
+ORDENADA:
+    Usamos uma ordem total das chaves;
+    Podemos fazer operações como encon-
+    trar mínimos (O(lg N)) e encontrar
+    a mediana (O(lg N), mas com campo N)
+
+Altura (preto + vermelho) de ARNEs <= 2*lg_2(N)
+(o que justifica, grandemente, o fato da maioria
+ dos algoritmos terem complexidade O(lg N)).
+
+Em geral, o campo 'N' é usado para podermos 
+manipular, ordenadamente, as chaves.

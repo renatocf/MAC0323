@@ -1,0 +1,84 @@
+ÁRVORES 2-3
+
+Inserção com chaves CRESCENTES em árvores 2-3
+
+A          (A)
+           / \
+
+C         (A C)
+          / | \
+ 
+E          (C)
+           / \
+         (A) (E)
+         / \ / \
+
+H          (C)
+           / \
+         (A) (E H)
+         / \ / | \
+
+L          (C)             (C H)      
+           / \       →     / | \    
+         (A) (E H L)      /  |  \
+         / \ / | | \    (A) (E) (L)
+                        / \ / \ / \
+
+M     (C H)            (C H)               (C  H  M)               (H)
+      / | \            / | \               / |   | \               / \
+     /  |  \     →    /  |  \       →     /  |   |  \   →         /   \
+   (A) (E) (L M)    (A) (E) (L M P)     (A) (E) (L) (P)          /     \
+   / \ / \ / | \    / \ / \ / | | \     / \ / \ / \ / \         /       \ 
+                                                              (C)       (M)   
+                                                              / \       / \  
+                                                             /   \     /   \  
+                                                           (A)   (E)  (L)  (P)
+                                                           / \   / \  / \  / \
+
+Estas árvores 2-3 mantêm, SEMPRE, um BALANCEAMENTO PERFEITO
+(cada um dos nós externos tem a mesma distância da raiz SEMPRE)
+
+Vimos que uma das possíveis implementações para estas árvores 
+é com árvores binárias com ponteiros de dois tipos (vermelhos
+e pretos): são as chamadas ÁRVORES RUBRO-NEGRAS ESQUERDISTAS
+
+ÁRVORES RUBRO-NEGRAS [ESQUERDISTAS]
+
+Propriedades:
+* todo ponteiro vermelho tende à esquerda;
+* todo nó é incidente a <= 1 ponteiro vermelho
+* BALANCEAMENTO PERFEITO: todo nó externo está à mesma distância
+  NEGRA da raiz (≡ distância contando somente ponteiros negros)
+
+
+A  (A)  C    (C)  E    (C)    H         (H)       L         (H)       
+→  / \  →    : \  →    / \    →         : \       →         : \       
+           (A)       (A) (E)           :   \               :   \      
+           / \       / \ / \          :     \             :     \     
+                                     :       \           :       \    
+                                   (C)       (L)       (C)       (M)  
+                                   / \       / \       / \       : \  
+                                  /   \               /   \     :     
+                                (A)   (E)           (A)   (E) (L)    
+                                / \   / \           / \   / \ / \    
+
+
+                          M        (H)
+                          →        / \
+                                  /   \
+                                 /     \
+                                /       \ 
+                              (C)       (M)     
+                              / \       / \  
+                             /   \     /   \  
+                           (A)   (E) (L)   (P)
+                           / \   / \ / \   / \
+
+
+Analisando a transformação das árvores 2-3 para as ABs, vemos que a
+distância negra permanece com o tamanho logarítmico. Entretanto, as
+alturas para as ARNEs (Árvores Rubro Negras Esquerdistas) podem ser
+maiores. Mas podemos analisar que, ainda assim, as alturas permanecem
+logarítmicas, com maior tamanho sendo 2*lg(N) (o que acontece quando
+a folha está ligada à raiz com uma intercalação de ponteiros VERMELHO/
+PRETO). Este é o caso da árvore resultante da inserção de H.

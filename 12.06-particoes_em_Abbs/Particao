@@ -1,0 +1,2 @@
+part(h,k): promove o "k-ésimo" nó (interno) para a raiz da árvore
+enraixada em 'k' (prog 12.14).

@@ -1,0 +1,33 @@
+COMPARAÇÃO DE IMPLEMENTAÇÕES DE TABELAS DE SÍMBOLOS
+
+                        
+                        |-------------------|-----------------------|
+                        |     PIOR CASO     |       MÉDIO CASO      |
+                        |-------------------|-----------------------|
+                        | ins | bus | selec |  ins  |  BCS  |  BSS  |
+|-----------------------|-----|-----|-------|-------|-------|-------|
+| Indexados por chaves: |  1  |  1  |   M   |   1   |   1   |   M   |
+|-----------------------|-----|-----|-------|-------|-------|-------|
+| Vetores ordenados     |  N  |  N  |   1   |   N   |   N   |   N   |
+| por chaves            |     |     |       |       |       |       |
+|-----------------------|-----|-----|-------|-------|-------|-------|
+| Listas ligadas or-    |     |     |       |       |       |       |
+| denadas por chaves    |  N  |  N  |   N   |   N   |   N   |   N   |
+| vetores desordenados  |     |     |       |       |       |       |
+|-----------------------|-----|-----|-------|-------|-------|-------|
+| Listas ligadas de-    |  1  |  1  | N*lgN |   1   |   N   |   N   |
+| sordenadas            |     |     |       |       |       |       |
+|-----------------------|-----|-----|-------|-------|-------|-------|
+| Vetores ordenados     |     |     |       |       |       |       |
+| por chaves com busca  |  N  |lg N |   1   |   1   |  lgN  |  lgN  |
+| binária               |     |     |       |       |       |       |
+|-----------------------|-----|-----|-------|-------|-------|-------|
+| Árvores binárias      |  N  |  N  |   N   |  lgN  |  lgN  |  lgN  |
+|-----------------------|-----|-----|-------|-------|-------|-------|
+| ABBs balanceadas      | lgN | lgN |  lgN  |  lgN  |  lgN  |  lgN  |
+|-----------------------|-----|-----|-------|-------|-------|-------|
+
+Estudaremos, nas próximas aulas, árvores binárias balanceadas, que 
+transformam estes 'piores casos' num comportamento logarítmico (lgN)
+para todos os casos. Isso é uma ótima aproximação, apesar de não
+aproximar exatamente árvores.

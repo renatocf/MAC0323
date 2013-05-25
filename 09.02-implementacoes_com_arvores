@@ -1,0 +1,40 @@
+IMPLEMENTAÇÕES COM ÁRVORES
+
+* Árvores binárias
+    árvores ENRAIZADAS (sempre terão raiz)
+    árvores PLANAS (sempre terão filhos direito/esquerdo)
+    O conceito de árvore binária pode variar (em grafos, nem sempre
+    elas são planas ou enraizadas).
+
+* Definição (recursiva):
+    Árvore é toda estrutura que tem uma RAIZ e uma subárvore esquer-
+    da e direita.
+                            nós internos
+                            ||   ||   ||
+                            ||   \/   ||        
+                            ||  |  |<------- RAIZ
+                            ||  /  \  ||
+                            \/ /    \ \/
+           subárvore {     |  |      |  |    } subárvore
+           esquerda  {     /  \      /  \    } direita
+                     {    /    \    /    \   } 
+                     {  | |    | || |    | | } 
+                         ^      ^  ^      ^
+                            nós externos
+
+* Árvore binária ≡  ou um NÓ EXTERNO e nenhum NÓ INTERNO        | |
+                    
+      |  |          ou uma RAIZ que é um nó interno e uma 
+      /  \          subárvore ESQUERDA e uma subárvore DIREITA.
+   |  |  |  |
+
+* Busca binária com 7 elementos (pode ser representada com árvores 
+  binárias), separados utilizando MENOR/MAIOR elementos como filhos
+  nas subárvores esquerda/direita:
+    
+   |1|2|3|4|5|6|7| 
+                                4        } 
+                               / \       } Em geral, as árvores
+                             2     6     } têm lg(N) patamares
+                           /  \   /  \   } 
+                          1   3   5   7  } 

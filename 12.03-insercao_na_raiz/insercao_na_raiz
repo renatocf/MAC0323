@@ -1,0 +1,7 @@
+Usando os algoritmos de rotação citados anteriormente, podemos
+criar uma maneira de inserir um novo elemento na raiz e, pos-
+teriormente, usarmos as rotações para podermos fazer o elemento
+'subir' a partir da árvore até o topo.
+
+Usamos a inserção comum e, em seguida, vamos subindo ele. Este
+algoritmo é recursivo, partindo de uma subárvore até o topo.

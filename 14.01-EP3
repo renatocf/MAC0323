@@ -1,0 +1,59 @@
+Os EPs 3 e 4 serão sobre manipulação de textos grandes.
+Usaremos o projeto Gutenberg (de livros digitalizados) para
+poderem ser utilizados.
+
+No EP3, teremos os trabalho de achar palavras dentro do texto
+- uma busca PEQUENA dentro de um texto GRANDE.
+No EP4, teremos uma continuação disto, em que vamos desejar 
+encontrar também sentenças que contêm mais de uma palavra.
+
+Em vez de simplesmente buscarmos uma palavra no texto, quebraremos
+o texto em várias sentenças, e estas serão mostradas.
+
+Além da opção de escolher uma palavra específica, desejaremos, 
+também, buscar sentenças que contêm palavras parecidas, variantes
+da palavra. O processo de descobrir a raiz da palavra é chamado
+de 'stemming', que têm uma versão modificada chamada de 'lemmatization'.
+
+Um exemplo de 'stemming' é encontrar 'search' a partir de 'searching',
+que conhece os processo de derivação das palavras nesta língua.
+
+A 'lemmatization' consegui fazer dericações um pouco mais complexas,
+que encontra variações impróprias. Ele encontraria, por exemplo, que
+'is' e 'are' são derivações de 'to be'.
+
+Esses conceitos são conceitos de Processamento de Linguagem Natural.
+A faculdade de Stanford tem um programa chamado de 'CoreNLP' que o
+utiliza. É interessante pegar e executar o programa, para vermos
+como ele é processado.
+
+Este programa pega os textos, enumera as sentenças e acha quais são
+as PALAVRAS e SÍMBOLOS, realizando o processo de 'lemmatization' 
+que vêm dele.
+
+A ideia do programa do EP3 é pegar a saída 'book.txt.out' feita a
+partir de 'book.txt' e, em seguida, utilizá-la para encontrar quais
+as sentenças que contêm uma certa 'query'.
+
+O usuário poderá passar, via linha de comando, duas opções: -e e -a.
+Quando procurar -e, teremos a palavra exata. Se tivermos -a, poderemos
+pegar também as variantes desta palavra. 
+Poderemos ter também as opções adicionais -v e -V, que implementam
+versões mais verbosas dele.
+
+No primeiro momento, o ideal é buscar sobre este processamento de
+linguagem natural CoreNLP.
+Uma técnica útil seria conseguir pegar uma tabela de símbolos
+que, dado uma palavra, acha sua raiz. Também seria interessante
+encontrar, dado uma raiz, as palavras dele.
+Também seria interessante utilizar outra tabela de símbolos que
+listasse, para cada palavra, quais são as sentenças. (Seria uma
+fase de pré-processamento).
+Isso compõe um total de 3 tabelas de símbolo. A intenção principal
+é encontrar uma forma de processar as informações (pré-processar)
+para que possamos encontrar, rapidamente, as tabelas de símbolo.
+
+Usando boas implementações das tabelas de símbolos, será possível
+implementar estas tabelas de forma que tenhamos uma complexidade
+logarítmica em relação ao vocabulário do livro. (O ideal é utilizar
+árvores rubro negras esquerdistas).

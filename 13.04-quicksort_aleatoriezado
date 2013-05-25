@@ -1,0 +1,21 @@
+Para evitarmos o pior caso de um quicksort, há uma maneira interessante
+de agir: quando temos um vetor ordenado, dependendo do algoritmo usado
+para a organização, o processo de aleatoriezação é muito bom para que
+esta entrada ruim não piore o desempenho. 
+
+    A maneira de agir é, em vez de sempre termos um pivô, é usar um pivô
+aleatoriezado, que 'sorteará' um índice e evitará que tenhamos trechos
+muito grandes para serem gerados.
+
+    Para fazer a análise do pior caso, quando temos a aleatoriedade, 
+temos uma forma diferente. Em vez de compararmos quantas COMPARAÇÕES 
+fizemos, dada a especificidade do caso-a-caso de um real número 
+aleatório, precisaríamos de um método diferente. O número de 
+comparações é uma variável aleatória. Entretanto, é possível construir 
+o NÚMERO ESPERADO de argumentos (E(X)). Ao fazer este cálculo, temos 
+que, em MÉDIA, o comportamento será N*lg(N), sendo possível provar que 
+a probabilidade de termos um comportamento N² é muito baixa.
+
+    Esse exemplo mostra que, ao falarmos de algoritmos ALEATORIEZADOS,
+precisamos trabalhar com perguntas diferentes, que incluem a MÉDIA das
+operações (pois temos uma v.a).

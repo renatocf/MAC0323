@@ -1,0 +1,222 @@
+HASHING (Tabela de Espalhamento)
+
+--- Forma de implementar tabelas de símbolos
+    supondo 'acesso digital às chaves'
+    Para criar uma tabela de hashings, é necessário criar 
+    mais hipóteses sobre as chaves (além do que supunha-
+    mos até o momento, que era haver uma relação de ordem
+    entre as chaves). Também é necessário haver o que se
+    chama de 'funções de hashing'
+    
+    Precisaremos supor que as chaves são compostas de
+    subunidades, chamados de 'dígitos':
+    
+        k | | | | | | | | | | | | | | | | | | | |
+           ^
+           '-- dígitos
+    
+    Em casos normais, quando temos chaves, não precisamos
+    nos preocupar em comparações entre duas chaves. O con-
+    ceito de comparação é MAIS ABSTRATO do que pensarmos 
+    em como a chave é composta, mesmo quando aplicamos
+    comparações entre inteiros (na qual eles são usados).
+    
+    Supomos que temos boas funções de HASHING (= funções 
+    de espalhamento/dispersão).
+    
+    tab. hashing ≡ função de hashing + tabela de símbolos
+                                       indexada por chaves
+    
+    As tabelas de símbolos indexadas por chaves são regis-
+    tros que são guardados utilizando números inteiros. Pa-
+    ra números pequenos, podemos construir tabelas de sím-
+    bolos baseadas em chaves. Estas chaves são boas porque
+    podemos criar um VETOR, e nossos acesso/inserção/remo-
+    ção são O(1). Porém, podemos ter alguns problemas, re-
+    lacionados principalmente ao TAMANHO das chaves ou a 
+    QUANTIDADE DE ELEMENTOS.
+    
+    As tabelas de Hashing foram criadas para poder utili-
+    zar a indexação dos objetos por chaves considerando 
+    quantidades muito grandes. Esse é um conceito interes-
+    sante, pois nos permite GENERALIZAR a tabela de sím-
+    bolos e ao mesmo tempo nos aproveitarmos da VELOCIDADE
+    DOS VETORES.
+    
+    Imaginemos que U seja o Universo de nossas chaves, sen-
+    do #U →  ∞. Consideremos que as chaves são os NOMES DAS
+    PESSOAS. Como não podemos criar um vetor para indexar
+    pelas chaves, mas precisamos levar a um vetor, precisa-
+    mos criar uma função f: U → V, uma FUNÇÃO DE HASHING.
+    
+                  .-------.          .-. 0     
+                  |       |          | |      
+                  | .--.  |          |-|      
+                  | |##| ----------> |#| f(x)     
+                  | |##|  |          |-|      
+                  | '--'  |          | |      
+                  |  ^    |          |-|      
+                  '--|----'          | |      
+                     N               '-' M-1     
+    
+    Em geral, |U| >> M. Ademais, muitas vezes, o número de 
+    objetos presentes em nossa tabelas de símbolos N pode 
+    ser MARIOR que M. Neste caso, ocorrem COLISÕES ≡ obje-
+    tos DIFERENTES mapeados pela função de Hashing a um 
+    mesmo endereço.
+    
+    Em tabelas de hashing, as COLISÕES são muito comuns, e 
+    existem algumas políticas para solucionar. Podemos criar
+    várias formas de fazer isso:
+    
+    1º CASO: RESOLUÇÃO DE COLISÕES POR ENCADEAMENTO
+    Fazemos com que nosso vetor seja um ponteiro para a ca-
+    beça de uma lista ligada. Cada nódulo da lista ligada, 
+    por outro lado, tem um PONTEIRO para o dado que desejamos.
+    
+    2º CASO: TABELAS DE HASHNG DINÂMICA
+    Teremos um vetor de certo tamanho e, de acordo com o nú-
+    mero de elementos, precisaremos AUMENTAR/DIMINUIR o ta-
+    manho de nosso vetor (que é o CONTRADOMÍNIO de nossa 
+    função). Isso cria algum custo adicional: a função 'f'
+    muda (porque ele ALTERA o contradomínio da função, já
+    que ela terá de mapear elementos em uma nova região). 
+    
+    Veremos, no momento, o 1º caso.
+    
+    Idealmente, queremos uma função INJETORA no caso N < M.
+    Como não conhecemos a entradaa de antemão, isto é im-
+    possível de assegurar.
+    
+    Na realidade, é impossível, porque não podemos construir
+    uma função que consiga distinguir todos os elementos 
+    do nosso universo 'U' (que é infinito). O usuário pode
+    ser 'maldoso' e, estudando a função, inserir um con-
+    junto de elementos que mapeie sempre no mesmo endereço.
+    Se usarmos o caso de uma tabela de hashing com resolu-
+    ção de soluções por encadeamento, teremos uma lista
+    ligada muito grande, cuja busca pode ser, no geral, 
+    O(N²). Nesta situação, a nossa tabela de hash será 
+    ineficiente.
+    
+    SOLUÇÃO:
+    Vamos usar funções 'f' que serão 'aleatórias' (pseudo)
+    e reprodutível.
+    
+                  .----------------.          .-. 0     
+                  | ._.     f-¹(0) |          | |      
+                  |-! !------------|          |-|      
+                  | ! !     f-¹(1)----------> |#| f(x)     
+                  |-!W!------------|          |-|      
+                  | ! !       ...  |          | |      
+                  |-! !------------|          |-|      
+                  | '"'     f-¹(M) |          | |      
+                  '----------------'          '-' M-1     
+    
+    * ALEATORIEDADE: O mapeamento de U para V parece aleatório
+                     e espalha bem entre o nosso conjunto.
+    * REPRODUTIBILIDADE: f leva SEMPRE ao mesmo local, dada a
+                         nossa entrada.
+    * UNIFORMIDADE: Queremos que nossa função possa espalhar 
+                    bem os nossos elementos entre todos os 
+                    lugares do vetor, de modo a que tenhamos
+                    quase todos os elementos preenchidos, 
+                    mesmo que ocorra algum tipo de colisão.
+                    (aproximadamente N/M elementos para cada
+                    chave).
+    
+    Como nossa função cria os intervalos de elementos de nos-
+    so universo U que levam ao nosso vetor, nós PARTICIONAMOS
+    o universo U. Se tivermos uma entrada aleatória W que pas-
+    se por várias partições, nossa tabela de símbolos será 
+    eficiente. Porém, se W ⊆ f-¹(K), K ∈ [0..M-1], então 
+    teremos todos os elementos mapeados na mesma casela do ve-
+    tor, e cairemos no problema da lista ligada.
+    
+    ALGUNS UNIVERSOS DE CHAVES
+    
+    (1) U = [0,1) = { reais com 0 ≤ x < 1 }
+        
+                        U
+        ----------|-----------|-------------> ℝ 
+                  |           |
+              ´¨¨¨'           '¨¨¨¨`
+             ↓                     ↓
+            | | | | | | | | | | | | |
+            0                      M-1
+        
+        FUNÇÃO: f: [0,1) →  {0,..,M-1}
+                     x   →   ⌊Mx⌋ 
+                Particionamos o intervalo [0,1) em M-1 
+                partes, com todos os elementos pertencen-
+                do a um subintervalo levando à mesma ca-
+                sela do vetor.
+        
+        PROBLEMA: Se tivermos os elementos concentrados em 
+                  alguma REGIÃO da tabela, teremos partes 
+                  do nosso vetor inutilizada.
+    
+    (2) U = ℕ 
+        
+        FUNÇÃO: f: ℕ → {0,..,M-1}
+                   n → n mod M (n % M)
+                
+                Pegamos o intervalo de inteiros e dividimos
+                de acordo com o MÓDULO da divisão.
+        
+        PROBLEMA: Se M é par e D ⊆ ℕ com todo d ∈ D par, 
+                  então f(D) ⊆ {0,2,4...} = ℕ ≡ 0 mod 2.
+                  Isto é, só 'endereços pares' são usados.
+        
+        SOLUÇÃO: Tipicamente usa-se valores PRIMOS para M,
+                 (o que garante restos da divisão diferen-
+                 tes) da ordem da quantidade de elementos
+                 esperada (se queremos 1.000.000 de números
+                 médio, precisamos pegar um número próximo
+                 a ele). Ou, como caso geral, podemos pegar
+                 um inteiro GRANDE.
+    
+    (3) U = {strings}
+                  octal  decimal  M=64 M=31
+        Ex: now  6733767 1816567   55   29
+        
+        ASCII: caracteres de 7 bits: 2^7 = 128
+        
+        FUNÇÃO: Poderemos pegar, como função, considerando 
+                cadacaractere como sendo um número da base
+                128. Isso cria uma forma de levarmos a string
+                a um número inteiro, reduzindo ao problema 
+                anterior.
+                
+                Ex: (now)_128 = n*128² + o*128¹ + w*1
+                              = 110*128² + 111*128 + 119
+                              = 1816567
+                
+        PROBLEMA: Podemos ter alguns problemas com relação a 
+                  isso, principalmente no que diz respeito a
+                  cálculos com palavras GRANDES. Para evitar-
+                  mos estes tipos de problemas, o que podemos
+                  fazer é usar o fato de que já aplicaremos
+                  a regra do módulo dos INTEIROS, reduzindo
+                  o tamanho dos números e evitando OVERFLOW.
+                  
+                  Isso gera outro problema; se tivermos como
+                  número uma potência de 2 (como 128), então
+                  todos os caracteres serão desconsiderados,
+                  pois para n*128² + o*128¹ + w*1 teríamos 
+                  que apenas o último caractere seria consi-
+                  derado (dado que os outros números serão
+                  múltiplos de 128, ou de qualquer outra po-
+                  tência de 2.
+                
+        SOLUÇÃO: Para evitarmos estes problemas, podemos ter
+                 duas abordagens:
+                 * Usar uma base PRIMA;
+                 * Usar a REGRA DE HORNER;
+        
+        REGRA DE HORNER
+        (Google)_128 =
+            ((((G*128 + o)*128 + o)*128 + g)*128 + l)*128 + e
+        
+        E se aplicarmos, em conjunto, o módulo, podemos então 
+        já obter a função.

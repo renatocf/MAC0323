@@ -1,0 +1,38 @@
+ROTAÇÕES:
+
+        h                    x      
+       ( )       rotL(h)      ( )      
+       / \        --->        / \      
+      /   \x      <---      h/   \       
+    | |   [ ]    rotR(x)   [ ]   | |
+    |A|   / \              / \   |C|
+    | | | | | |          | | | | | |
+        |B| |C|          |A| |B|   
+        | | | |          | | | |      
+                
+Ambas as árvores DEVEM continuar a respeitar a regra:
+    "A <= h <= B <= x <= C"
+
+As rotações são interessantes para uqe possamos fazer com
+que as árvores tenham sempre altura log(N), a qual é mui-
+to melhor que a altura média sqrt(N) ou que o pior caso N.
+
+          | ()                    |     ()
+          |  \                    |    /  \
+          |   ()     Altura lg(N) |   ()  ()
+          |    \                  |   /\  /\
+          |     ()                |  ()()()()
+          |      \                |  /
+          |       ()              | ()
+          |        \             
+          |         ()
+          |          \
+          |           ()
+          |            \
+          |             ()
+          | Altura N     \
+          |               ()
+
+As rotações são úteis nesse caso porque com um critério simples
+de querer trocar os elementos conforme o peso das árvores poderíamos,
+aos poucos, trocar os elementos de lugar.

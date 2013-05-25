@@ -1,0 +1,116 @@
+REMOÇÃO DE MÍNIMO EM ÁRVORES 2-3
+
+Ex:
+               (H)               | Para removermos um elemento  
+               / \               | de uma árvore, se este for o
+              /   \              | mínimo teremos que ele sem-
+             /     \             | pre será o elemento mais à
+            /       \            | esquerda na BASE da árvore
+           /         \           | 2-3. Temos, porém, de SEMPRE
+          /           \          | MANTER a característica do 
+         /             \         | balanceamento perfeito.
+       (D)             (L)       |  
+       / \             / \       | Se o menor elemento for um
+      /   \           /   \      | 3-nó, o processo de retira-
+     /     \         /     \     | da será muito simples, pois
+   (B)     (F)     (J)     (N)   | BASTA que retiremos o ele-
+   / \     / \     / \     / \   | mento do local, e a altura
+ (A) (C) (E) (G) (I) (K) (M) (O) | (balanceamento) se manterá
+ / \ / \ / \ / \ / \ / \ / \ / \ | constante (perfeita).
+
+Para um 3-nó, basta fazermos:    |       |
+                               (A A) →  (A)
+                               / | \    / \
+
+Mas para um 2-nó, retirando-o da base, quebraremos o balancea-
+mento perfeito. Para executar estas remoções, o que podemos fa-
+zer é realizar um truque: retirar TODOS os 2-nós (criando 3-nós
+e até 4-nós). Faremos isso 'descendo' a árvore da raiz até a
+base, e depois da remoção, corrigiremos 'subindo' de volta 
+para a raiz (eliminando 4-nós conforme a necessidade).
+
+IDEIA: - 4-nós temporários;
+       - descemos na árvore mandento o invariante ι:
+         o presente não é um 2-nó (se for filho esquerdo existe
+         NÃO é um 2-nó).
+
+Alguns casos em que faremos modificações:
+
+
+I. (olhando a base no próprio
+    elemento)
+(a) 3-nó
+             ↓  
+           (   )
+           / | \
+
+II. (olhando à esquerda)
+(a) 2-nó com filhos 2-nó:
+    transformamos em um 4-nó
+          
+        ( )          ↓  
+        / \   →   (     )
+      ( ) ( )     ↓ | | \
+      / \ / \ 
+
+(b) 2-nó com filho esquerdo 3-nó
+    (não precisamos fazer nada)
+
+             ↓  
+            ( )
+            ↓ \
+        (   ) 
+        / | \
+
+(c) 2-nó com filho direito 3-nó
+
+        ↓               ↓  
+       (B)             (C)
+       ↓ \      →      ↓ \
+     (A) (C D)      (A B) (D)
+     / \ / | \      / | \ / \
+
+(d) 4-nó com filhos esquerdos 2-nó
+         ↓  
+       (B C D)            (C D)
+      ↙  ↓ | \  →        ↙  | \
+    (A) (C)        (A B C)
+    / \ / \        / | | \
+
+Em nosso exemplo original,teríamos as transformações
+para remoção do mínimo:
+          (D     H      L )
+        ↙    |       |     \
+      ↙      |       |      \
+    (B)     (F)     (J)     (N)
+    / \     / \     / \     / \ 
+  (A) (C) (E) (G) (I) (K) (M) (O)
+  / \ / \ / \ / \ / \ / \ / \ / \
+            
+                 ↓ (c)
+
+                   (H L) 
+                  ↙  | \
+                ↙    |  \
+              ↙      |   \
+            ↙        |    \
+     (B  D  F)       |     \
+     / |   | \      (J)     (N)
+    /  |   |  \     / \     / \
+  (A) (C) (E) (G) (I) (K) (M) (O)
+  / \ / \ / \ / \ / \ / \ / \ / \
+
+                 ↓ (d)
+
+                   (H L) 
+                   | | \
+                   | |  \
+                  ↙  |   \
+                ↙    |    \
+              ↙      |     \
+            ↙        |      \
+         (D F)      (J)     (N)
+         / | \      / \     / \
+        /  |  \    /   \   /   \   
+  (A B C) (E) (G) (I) (K) (M) (O)
+  / | | \ / \ / \ / \ / \ / \ / \

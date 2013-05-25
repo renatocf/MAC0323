@@ -1,0 +1,101 @@
+ÁRVORES BINÁRIAS (ABs)
+
+Formalmente: uma árvore binária é constituída de NÓS EXTERNOS e 
+             NÓS INTERNOS. Uma AB pode ser um único nó externo e 
+             nenhum nó interno ou um nó interno especificado, 
+             chamado de RAIZ, e uma SUBÁRVORE ESQUERDA e uma 
+             SUBÁRVORE DIREITA, que são ambas ABs.
+
+Ex: [ ] nó externo
+    ( ) nó interno
+
+ABs com N nós internos:
+
+***********************************************************************
+N = 0        [ ]
+
+***********************************************************************
+N > 0        ( )
+            /   \
+        |   |   |   |
+        |   |   |   |
+        |   |   |   |
+    subárvore   subárvore 
+    esquerda      direita
+
+***********************************************************************
+N = 1
+            ( ) 0
+            / \
+          [ ] [ ] 1
+
+***********************************************************************
+N = 2
+            ( ) 0             ( ) 0     
+            / \               / \
+           /   \             /   \
+         ( ) 1  ( ) 1    1 ( )    ( ) 1
+         / \                      / \
+     2 [ ] [ ] 2              2 [ ] [ ] 2
+
+***********************************************************************
+N = 3
+            ( ) 0           |               ( ) 
+            / \             |               / \
+           /   \            |              /   \
+          /     \           |           ( )    [ ]
+     1 ( )       ( ) 1      |           / \ 
+       / \       / \        |          /   \
+      /   \     /   \       |        ( )   [ ]
+    [ ]   [ ] [ ]   [ ]     |        / \
+     2     2   2     2      |       /   \
+                            |     [ ]   [ ]
+    
+              ( )           |          ( )   
+              / \           |          / \   
+             /   \          |         /   \  
+          ( )    [ ]        |       [ ]   ( )    
+          / \               |             / \       
+         /   \              |            /   \      
+       [ ]   ( )            |          [ ]   ( )    
+             / \            |                / \    
+            /   \           |               /   \   
+          [ ]   [ ]         |             [ ]   [ ] 
+
+            ( )             |
+            / \             |
+           /   \            |
+         [ ]   ( )          |
+               / \          |
+              /   \         |
+            ( )   [ ]       |
+            / \             |
+           /   \            |
+         [ ]   [ ]          |
+
+***********************************************************************
+TEOREMA: t_N = número de ABs com N nós internos
+         Então t_N = 1/(N+1) * (2*N)
+                               ( N ) 
+         Este número é chamado NÚMERO DE CATALAN:
+         (Catalan) = (1 + 0*(1/sqrt(n))) * 2^(2n)/(sqrt(πN^3))
+                   ~ 4^N/sqrt(π*N^3)
+         
+         Isso demonstra que o número de árvores cresce em ordem
+         exponencial com base 4.
+
+***********************************************************************
+QUANTIDADES DE INTERESSE:
+(1) Profundidade média dos nós internos:
+    1/N     *     ∑ prof(x)
+              (x ∈  nós internos)
+    
+(2) Profundidade média dos nós internos:
+    1/(N+1) *     ∑ prof(y)
+       ^      (y ∈  nós externo)
+       |
+       `- Encontrado empiricamente. Pode ser provado, porém,
+          usando indução.
+
+(3) Altura de uma árvore:
+    max{ prof(x): x ∈ nós internos }

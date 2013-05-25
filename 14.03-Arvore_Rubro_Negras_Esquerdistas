@@ -1,0 +1,32 @@
+ÁRVORES SUBRO NERGAS
+
+IDEIA: Estabelecer uma correspondência biunívoca com certas ABBs com
+       ponteiros VERMELHOS e PRETOS.
+
+                 (M)                                  (M)
+                 / \                                  / \
+                /   \                                /   \ 
+               /     \          ↔                   /     \
+           (E J)      (R)                          /       \
+           / | \      / \                         /         \
+      (A C) (H) (L) (P) (S X)             (E)---(J)         (R)
+      / | \ / \ / \ / \ / | \             / \     \        /   \
+                                   (A)--(C) (H)   (L)     /     \
+                                   / \    \ / \   / \    /       \   
+                                                       (P) (S)--(X)
+
+                 (M)                As ABBs com ponteiros normais
+                 / \                e pretor que correspondem às 
+                /   \               árvores 2-3 são aquelas em que:
+               /     \              (1) ponteiros vermelhos são 
+              /       \                 esquerdistas
+             /         \            (2) nenhum nó é incidente e mais
+           (J)         (R)              de um ponteiro vermelho
+          +  \         / \          (3) [CRUCIAL] todos os nós exter-
+         +    \       /   \             nos estão à mesma distãncia
+      (E)     (L)   (P)   (X)           negra da raiz
+      / \     / \   / \   + \                
+    (C) (H)             (S)                
+    + \ / \             / \                
+   (A)                
+   / \                

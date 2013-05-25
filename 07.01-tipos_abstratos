@@ -1,0 +1,57 @@
+TIPO ≡ conjunto de valores e operações sem esses valores
+
+TIPO ABSTRATO ≡ Objeto do tipo são manipulados apenas através
+                de uma interface explícita
+
+Os inteiros mesmo são exemplos de tipos abstratos. Ex:
+- unsigned int:
+  O 0 representa o próprio 0 e para um computador de 32 bits, o 
+  maior número representável é o 2³²-1
+- inteiro com sinal:
+  Temos o primeiro número 1/0 representando o sinal. Isto causa,
+  porém, um problema: além de diminuir a capacidade de represen-
+  tação, temos duas representações para o 0 (0...0) e (1..0).
+- signed int:
+  Representa os inteiros em complemento de 2. Porém, em vez de 
+  sequencialmente, o número -1 é representado pelo 111111, cri-
+  ando um ciclo. Além de parecer mais com a reta dos inteiros, 
+  a aritmética deles funciona como a dos inteiros módulo 'm'. 
+  (A partir de certo número positivo ou negativo, o número se
+  repete).
+
+Ao aprender sobre inteiros, não precisamos saber como eles são re-
+presentados. Podemos usar um 'shift', por exemplo, para multipli-
+car um número por 2 de forma mais rápida. Porém, isso é uma que-
+bra do tipo abstrato - e pode ser muito ruim, pois ao dependermos
+da implementação tiramos a modularidade. Além disso, o programa
+pode quebrar caso se altere a forma de implementação.
+
+Ex: Algoritmos de ordenação baseados em comparações funcionam 
+    para qualquer tipo cujos valores podem ser comparados com rela-
+    ção a 'x < y'
+    Objeto genérico: tipo Item
+    
+    Ex: Algoritmos de ordenação baseados em comparações
+        bubblesort, inserctionsort, quicksort, mergesort, heapsort
+        (radixsort e bucketsort não são deste tipo)
+    
+    Ex: Item.h para inteiros
+        
+        typedef int Item;
+        #define less(A,B) ((A) < (B))
+        #define eq(A,B)   ((A) == (B))
+        
+        Ao fazer #define parametrizados (macros parametrizadas) de-
+        vemos usar muitos parênteses (até em excesso) para garantir
+        que o compilador não entenda algo e o interprete incorreta-
+        mente.
+        Não precisamos, porém, definir mais conceitos porque a arit-
+        mética de inteiros já é padrão no C.
+    
+    Ex: Item.h para strings
+        
+        #define less(A,B) (strcmp((A),(B)) < 0)
+        #define eq(A,B)   (strcmp((A),(B)) == 0)
+        
+        Novamente, usamos muitos parênteses para garantir que não
+        haja problemas nas definições.

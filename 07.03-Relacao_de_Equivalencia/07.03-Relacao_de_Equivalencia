@@ -1,0 +1,12 @@
+UF.h - header definido por Sedgewixk para tratar de relações 
+       de equivalência.
+       
+       Tipo Abstrato
+       Tipo Abstrato de 1ª classe
+       - Tipo para o qual pode haver várias instâncias
+         dentro do programa. Neste caso, desejamos que
+         haja variáveis e se deseja que java atribuições.
+
+       Ex: Números Complexos
+           COMPLEX.h
+

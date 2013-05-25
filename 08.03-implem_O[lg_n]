@@ -1,0 +1,30 @@
+Ao pensarmos numa tabela de símbolos com inteiros, temos um pro-
+blema interessante: ou a inserção ou a seleção são O(n).
+Temos dois casos:
+    * representação em vetor ordenado:
+      Temos uma busca O(lg N). Porém, para manter a ordenação
+      nesse caso, temos uma inserção que, no pior caso, é O(N*lg N)
+    * representação em vetor não ordenado:
+      Temos uma busca O(N), pois precisamos percorrer tudo. Po-
+      rém, fazer a inserção é muito simples dado que armazenemos
+      a posição do último elemento. Ela é O(1) (constante).
+    
+    O mesmo vale, se pensarmos, numa tabela de símbolos que fosse
+    implementada utilizando listas ligadas.
+
+Veremos uma forma de implementar uam tabela de símbolos usando fun-
+ções de complexidade lgN (majoritariamente utilizando árvores):
+- O(lg N) busca, inserção, remoção, seleção;
+  --> árvores balanceadas
+
+- O(1) [tipicamente] para busca, inserção, remoção
+  --> Tabelas de Hashing
+
+Quando, porém, as chaves são simpkes, em quantidades 'pequenas', po-
+demos implementar VETORES BOOLEANOS (de bits).
+(Também conhecidos como BITMAPS, VETORES CARACTERÍSTICOS, FUNÇÕES
+ CARACTERÍSTICAS)
+
+Porém, são necessárias quantidades pequenas. A aplicação pode incluir,
+também, criar booleanos diferentes (poderiam guardar uma informação,
+que dê alguma informação extra).

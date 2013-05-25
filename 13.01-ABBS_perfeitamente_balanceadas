@@ -1,0 +1,3 @@
+As ABBS de menor tamanho são como as árvores binárias vistas para
+o processo de heapsort (heaps), as quais têm altura logarítmica
+de acordo com o número de nós.

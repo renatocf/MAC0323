@@ -1,0 +1,71 @@
+Duas representações básicas de grafos:
+(a) Matriz de adjacências
+(b) Listas de adjacências
+
+(a) Matriz de Adjacência:
+    
+    Uma boa maneira de fazer grafos pequenos e 
+    representá-los é criar uma matriz (chamada
+    de matriz de adjacência). Ela tem uma re-
+    dundância ((N*N-N)/2 elementos), e por isso
+    nem sempre é eficiente.
+    
+    (Matriz de adjacência para o grado do iní-
+     cio da aula)
+    
+        0   1   2   3   4   5   6   7   
+      .---.---.---.---.---.---.---.---.
+    0 | 0 | 1 | 1 | 0 | 0 | 1 | 1 | 1 |
+      |---|---|---|---|---|---|---|---|
+    1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
+      |---|---|---|---|---|---|---|---|
+    2 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
+      |---|---|---|---|---|---|---|---|
+    3 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 |
+      |---|---|---|---|---|---|---|---|
+    4 | 0 | 0 | 0 | 1 | 0 | 1 | 1 | 1 |
+      |---|---|---|---|---|---|---|---|
+    5 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 |
+      |---|---|---|---|---|---|---|---|
+    6 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
+      |---|---|---|---|---|---|---|---|
+    7 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 |
+      '---'---'---'---'---'---'---'---'
+
+(b) Listas de adjacência
+    
+    Quando temos um grafo esparso, podemos usar esta repre-
+    sentação alternativa (com um vetor de ponteiros para ca-
+    da elemento, totalizando 'N' para cada ponto e depois
+    uma lista de elementos ligados a ele com cada um). Te-
+    mos então: 
+      
+      .--.
+    0 |  |-> |7||-> |5||-> |2||-> |1||-> |6||/
+      |--|
+    1 |  |-> |1||-> |0||/
+      |--|
+    2 |  |-> |7||-> |0||/
+      |--|
+    3 |  |-> |5||-> |4||/
+      |--|
+    4 |  |-> |6||-> |5||-> |7||-> |3||/
+      |--|
+    5 |  |-> |0||-> |4|| |1||/
+      |--|
+    6 |  |-> |4||-> |0||/
+      |--|
+    7 |  |-> |1||-> |2||-> |0||-> |4||/
+      '--'
+    
+    Pensando na estrutura, podemos pensar na complexi-
+    dade da memória. Admitindo uqe um ponteiro tenha
+    tamanho de inteiro, para as listas de adjacência
+    com N vértices e M arestas:
+    = N + (2*M * 2)
+      ^     ^    ^
+      |     |    '- 2 bytes para cada elemento da
+      |     |       lista (número + pointer).
+      |     '------ cada aresta que admite uma ligação
+      |             é representado 2 vezes.
+      '------------ elementos do vetor.

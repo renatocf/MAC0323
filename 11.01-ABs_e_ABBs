@@ -1,0 +1,27 @@
+ST.h (Tabelas de símbolos)
+
+STinit   ();
+STcount  ();
+STinsert ();
+STsearch ();
+STdelete ();
+STselact ();
+STsort   ();
+
+Árvores binárias:
+Nódulos externos apenas ou um nódulo interno ligado a duas outras 
+árvores binárias.
+AS árvores binárias dependem de objetos identificados por chaves.
+Uma árvore binária tem um nó interno especial - a raiz - que é o
+início da árvore.
+
+Árvore de busca binária (ABB):
+
+                              y ( )
+                                / \
+                          X |   | |   | Z
+                            |   | |   |
+                            |   | |   |
+                            |   | |   |
+
+∀ x ∈ X, ∀ y ∈ Y, a <= y <= z

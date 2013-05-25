@@ -1,0 +1,23 @@
+RELAÇÃO BINÁRIA
+
+R ⊆ X x X
+Uma relação binária é um subconjunto do produto cartesiano
+de dois conjuntos (ou mesmo do próprio conjunto consigo 
+mesmo, X²).
+
+Temos algumas formas de representar a classe:
+"aRb" ≡ (a,b) ∈ R
+
+As relações podem ser de vários tipos:
+* reflexiva: (a,a) ∈ R, ∀ x ∈ R
+  (Grafos, em nossa definição, não são reflexivos).
+
+* simétrica: (a,b) ∈ R → (b,a) ∈ R, ∀ a,b ∈ X
+  Os grafos são, por sua definição, simétricos.
+
+* transitiva: (a,b),(b,c) ∈ R → (a,c) ∈ R (∀ a,b,c)
+  Os grafos, em geral, não são transitivos
+
+DICAS PARA O EP:
+paRTIÇÕES
+REPRESENTAR RELAÇÕES DE EQUIVALÊNCIA

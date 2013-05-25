@@ -1,0 +1,59 @@
+Yoshiharu Kahayakawa <yoshi@ime.usp.br>
+Sala 104C; ramal 916002
+MAC0323
+-----------------------------------------------------------------------
+BIBLIOGRAFIA
+
+(1) LIVRO PRINCIPAL: Algorithms in C Part 1-4, Sedgewick
+    Partes 1-4 cobrem Estrutura de Dados e algoritmos de ordenação.
+
+(2) Algorithms, S. & Wayne 
+    Algoritmos usados em Java. É uma versão "mais nova" e expandida
+    do Algorithms in C.
+
+(3) Introduction to algorithms, Cormen, Leisersen, Rivest & Stein
+    Livro mais técnico, escrito em pseudocódigo. Traz algoritmos mais
+    sofisticados, e por isso é escrito com pseudocódigo.
+    Mostra análise de complexidade e prova de corretude dos algoritmos
+    (com uma análise matemática mais precisa).
+
+(4) http://www.ime.usp.br/~pf/algoritmos/, Paulo Feofiloff
+    Parte focada mais em "programação".
+
+-----------------------------------------------------------------------
+PÁGINA DA DISCIPLINA
+
+    Principalmente com códigos das aulas (material, em grande parte 
+do livro do Sedgewick): http://www.ime.usp.br/~yoshi/2013i/mac323
+    O livro têm exercícios disponíveis para checar o entendimento dos
+assuntos da disciplina (exercícios mais simples, mais complexos e de
+tipos variados).
+    Ler e exercitar as seções do livro que serão usados.
+
+-----------------------------------------------------------------------
+NOTAS
+
+    Até 10% de nota para algum tipo de atividade extra.
+    Média mínima: MP >= 5.0, MEP >= 6.0
+
+-----------------------------------------------------------------------
+MONITORIA
+    
+    Monitores ainda não definidos. Olhar na página.
+
+-----------------------------------------------------------------------
+EMENTA
+
+    Ementa:
+    - Recapitulação: Listas ligadas, alocação dinâmica de memória,
+      pilhas, filas.
+    - Tabelas de hashing/espalhamento/dispersão
+    - Árvores (uso em estrutura de dados)
+      São usadas para permitir acesso a elementos internos de uma lista
+      de modo eficiente. (Contêm 2 ponteiros por objeto - mais custosas
+      em questão de memória, mas algoritmos de busca são mais rápidos).
+      - Árvores binárias de busca, árvores balanceadas
+    - Estruturas abstratas de dados, encapsulamento 
+      Muitos problemas têm estruturas comuns, para os quais foram cria-
+      das estruturas abstratas.
+    - 

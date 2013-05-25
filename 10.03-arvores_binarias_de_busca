@@ -1,0 +1,76 @@
+ÁRVORES BINÁRIAS DE BUSCA (ABBS)
+
+Suponhamos que as chaves (key) de nossos objetos (de tipo Item)
+são totalmente ordenadas.
+
+Para organizar um conjunto finito de objetos em uma Árvore Binária,
+colocamos um dos objetos, digamos X, na raiza e colocamos todos os
+objetos com chave menor que 'x' na subárvore esquerda, e colocamos
+todos os objetos com chave maior que 'x' na direita.
+
+                                ( ) x
+                                / \
+ { x1: chave x' < chave x } |   | |   | { x': chave x' > chave x }
+                            |   | |   |
+                            |   | |   |
+
+O preenchimento é feito recursivamente, tomando ocmo base a árvore
+com N = 0 nós internos.
+
+Ex: Conjunto: {E, X, A, M, P, L}
+    [A < E < L < M < P < X]
+    
+               ( ) E                           ( ) M 
+               / \                             / \
+              /   \                           /   \      
+             /     \                         /     \     
+         A ( )     ( ) P                    /       \
+           / \     / \        ↔              /         \
+                  /   \                E ( )         ( ) P 
+              L ( )   ( ) X              / \         / \   
+                / \   / \               /   \       /
+                   \                A ( ) L ( ) X ( )
+                   ( ) M              / \   / \   / \ 
+                   / \                      
+
+    Existem muitas formas de criar árvores desta maneira. Para cada
+    um dos 'N' elementos, temos 'N' árvores possíveis.
+    
+    Um dos subcasos possíveis é análogo à lista ligada>
+    
+              ( ) A                                X ( )
+              / \                                    / \
+                ( ) E                            P ( )
+                / \                                / \ 
+                  ( ) L                        M ( )
+                  / \                            / \
+                    ( ) M                    L ( )
+                    / \                        / \ 
+                      ( ) P                E ( )
+                      / \                    / \
+                        ( ) X            A ( )
+                        / \                / \
+    
+    Isso demonstra que a árvore de busca binaria é uma GENERALIZAÇÃO
+    do conceito de lista ligada. E usaremos estas representações com
+    ponteiros para criá-las. AS árvores como acima são chamadas tam-
+    bém de DEGENERADAS.
+    
+    Suponha que temos objetos associados aos nós internos de uma AB. 
+    Dizemos que esta Árvore Binária com os objetos formam uma ABB
+    (ÁRVORE DE BUSCA BINÁRIA) se vale que para todo nó interno V, 
+    todos os objetos na subárvore esquerda de V tem chave <= a cha-
+    ve do objeto e todos os objetos na subárvore direita têm chave 
+    >= que a chave do objeto em V.
+    
+    Esquema de árvore de busca binária:
+    
+                                   ( ) x
+                                   / \
+    { x1: chave x' < chave x } |   | |   | { x': chave x' > chave x }
+                               |   | |   |
+                               |   | |   |
+    
+    Podemos pensar os nós externos de uma árvore como os intervalos
+    definidos entre elas. Por esse motivo, existem N+1 nós externos.
+    (que criam intervalos entre os pontos e têm pontas soltas).

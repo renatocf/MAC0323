@@ -1,0 +1,19 @@
+REMOÇÂO
+
+(0): remoção da raiz:
+    
+        ( )   Sendo 'm' o MÍNIMO da subárvore direita, podemos, então
+        / \   tornar a esquera desse mínimo a nova raiz, sendo m->l o
+      | | | | próprio L e o m->r uma R', que é a subárvore R modifica-
+      |L| |R| da com 'm' como imediatamente anterior à nova raiz.
+      | | | |
+              -->    ( ) m
+                     / \
+                   | | |  |
+                   |L| |R'|
+                   | | |  |
+    Precisaremos de uma algoritmo de JUNÇÃO (supondo que L <= R)
+
+(1): remoção geral:
+    É o precesso de recursão considerando o elemento a raiz de uma
+    subárvore apropriada.

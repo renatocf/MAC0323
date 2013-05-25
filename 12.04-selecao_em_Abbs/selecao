@@ -1,0 +1,8 @@
+Usaremos a seleção para, posteriormente, criarmos a remoção.
+O protótipo da função para selação é:
+
+STselect(k): devolve o k-ésimo elemento (k = 0,1,...)
+
+Uma maneira trivial de implementar a seleção é ordenarmos o vetor
+e, posteriormente, mostrarmos o k-ésimo dele.
+

@@ -1,0 +1,7 @@
+Uma outra maneira de representar grafos são os grafos dirigidos
+(digrados).. Temos:
+* V = conjunto de vértices;
+* E = arestas dirigidas (≡ arcos).
+
+Esses grafos admitem arcos para si próprios, e PODEM representar
+a estrutura de PONTEIROS entre páginas html na Web.

@@ -1,0 +1,83 @@
+void STinsert(Item);
+Item STsearch(Key);
+    busca sem sucess: NULLItem
+void STsort(void (*visit)(Item));
+
+Key: less(A,B)
+
+Ex de cliente: prog 12.2
+recebe maxN, flag sw(0/1), semente seed (item aleatório)
+
+IMPLEMENTAÇÕES DE TABELAS DE SÍMBOLOS
+
+(0) TABELAS INDEXADAS POR CHAVES
+    [ = bitmaps, vetor de bits, função característica...]
+    
+    | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+     0                         k                           M
+    
+    Hipótese: chaves ∈ {0,1,..,M}, M "pequeno"
+    Uma grande vantagem é que os índices das chaves são muito
+    simples (e podem ser calculadas em tempo constante).
+    
+    Uma desvantagem desse tipo de representação é que ele usa
+    muita memória. Por exemplo, para 10^8 números, podemos es-
+    timar quanta memória teremos:
+    1 0000 0000 -> int/ponteiro de 32 bits = 4 bytes
+    4 * 10^8 bytes = 400 * 10^6 bytes = 400 MB [~381*2^20 bytes]
+    
+    OBS: É possível transformar chaves 'mais genéricas' em chaves
+         ∈ {0,..,M}. Esse esquema se chama HASHING (tabelas de 
+         espanhamento).
+    
+    Inicialização (STInit): O(n)
+        Se o conjunto for pequeno em relação a 'M', teremos um
+        gasto de tempo grande (por exemplo, se houver um núme-
+        ro pequeno de itens dentro do total alocado, mas para
+        criar precisamos inicializar todos com NULLItem)
+    
+    Count (STcount): O(1)
+        Cada vez que tiramos/colocando, é simples incrementar/
+        decrementar.
+    
+    Inserção (STinsert): O(1)
+        Coloca algum elemento a partir da chave
+    
+    Seleção (STselect): O(n)
+        Depende da quantidade desejada pelo cliente para encontrar
+        o valor. No pior caso, é O(n).
+    
+    Percorrer o vetor de acordo com as chaves (STsort): O(n)
+        Busca por todos os elementos do vetor.
+    
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    
+    (1)  VETORES ORDENADOS
+        Os vetores ordenados têm como grande vantagem a possibilidade
+        de buscar utiizando BUSCA BINÁRIA. O pior problema é que, na
+        realidade, não é possível fazer uma inserção e manter a or-
+        dem sem criar deslocamentos (tempo linear).
+    
+    (2)  LISTAS LIGADAS NÃO ORDENADAS
+    (2') LISTAS LIGADADS ORDENADAS
+        Podemos realizar, para a ordenação, um Merge sort (n*lg(n)).
+        O pior problema é que não há como buscar rapidamente.
+    
+    
+    EXPERIMENTOS:
+    (1) Inserir chaves aleatórias na tabela.
+    (2) Imprimir chaves diferentes usando o STsort()
+    
+    M = 100.000  | M = 10^8
+    (0) 0.014s   | (0) 34s (apenas 1s para malloc de 10^8)
+    (1) 8s       | (1) X - devem demorar da ordem de minutos
+        4s (com  |
+         busca   |
+        binária) |
+    (2) 25s      | (2) X 
+    
+    
+    Em geral, aquém da implementação com uso tabelas indexadas por
+    chaves, temos tempos lineares. Tentaremos, com o uso de ÁRVORES,
+    diminuir estes tempos para a ordem logaritmica.

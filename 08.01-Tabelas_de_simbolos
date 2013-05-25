@@ -1,0 +1,25 @@
+TABELAS DE SÍMBOLOS
+[ = Dicionários ] 
+
+Conjunto DINÂMICO de objetos
+
+tipo -> valores: conjunto de objetos
+     -> operações "principais":
+        [ - inserção de objetos;
+        [ - busca de objetos;
+        [ - remoção;
+        [ - inicialização;
+        [ - contagem/teste de ∅;
+        [ - seleção 
+        [ - visitar cada elemento/listar
+
+Cada item pode ser conhecido por uma identificação (key) ordenável 
+e a própria informação a qual ele se refere:
+    ITEM |--> chave key(A)
+     (A) |--> Info
+    
+    len(k,L) ≡ K < L
+        ^^^-- chaves
+    eq(K,L) ≡ K == L
+    
+    Conv: NULLitem <-> devolvido em buscas sem sucesso

@@ -1,0 +1,40 @@
+IMPLEMENTAÇÕES ELEMENTARES DE TABELAS DE SÍMBOLOS
+
+* 5 tipos de implemetações:
+- indexado por chaves
+- vetores, listas ligadas (ordenados e não ordenados)
+- [ + busca binária ]: vetores ordenados, indexados por chaves
+
+    M = 100.000
+    {0, 1, .., M} inteiros
+    
+EXPERIMENTO: gerando M inteiros independentes uniformemente
+ao acaso:
+- buscamos se o int já foi gerado;
+- inserimos caso não esteja presente.
+
+* (Vetores ordenados + busca binária) x Árvores de Busca Binária
+    
+    VOBB: Vetores ordenados + busca de busca binária
+    ABBS: Árvores de busca binária
+    
+    VOBB | ABBS     | VOBB          
+    ~45s | 0.4ss    | 100.000: ~4s  } Observando este comportamento
+    ~44s | 0.36s    | 200.000: ~15s } podemos ver que o algoritmo 
+                    | 300.000: ~45s } aparenta ter comportamento 
+                    | 400.000: ~60s } quadrático.
+                    |                 
+                    |                 O Comportamento geral das ABBs
+                    |                 é pouco pior que linear.
+
+* (Vetores ordenados por chaves) x Árvores de Busca Binária
+    
+    VICH: Vetores indexados por chaves
+    ABBS: Árvores de busca binária
+    
+    Para M = 10^8 inteiros:
+        VICH |  ABBS
+        ~25s | ~4m20s 
+
+    Os tempos não são muito bons quando comparados com VICH, mas
+    elas se mostram boas quando comparadas em eficiência de memória.

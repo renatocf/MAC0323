@@ -1,0 +1,18 @@
+ÁRVORES BINÁRIAS DE BUSCAS
+
+* Rotações
+* Seleção
+* Inserção na raiz
+* Remoção (o único elemento não visto até o momento)
+----------------------------------------------------
+* Balanceamento
+
+     Veremos a remoção, nunca vista até o momento. Esse método será
+bem eficiente, exceto quando houver algum tipo de inserção 'mal-
+dosa' na árvore (o que ocorre quando temos os elementos ordenados,
+e estas criam listas ligadas. Nesse caso, o tempo será linear para
+remoção). 
+    Chamamos de 'balanceamento' uma técnica que permitirá que as
+árvores sejam 'baixas' (com altura no máximo lg(n)). Nesse caso,
+temos uma propriedade muito boa, pois evitaremos esse tipo de pro-
+blemas.
