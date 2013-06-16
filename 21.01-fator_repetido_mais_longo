@@ -1,0 +1,144 @@
+FATOR REPETIDO MAIS LONGO
+-----------------------------------------------------------------------
+
+Achar um trecho consecutivo de letras é um problema vindo da computação
+científica, por meio da bioinformática.
+
+    Alfabeto:       A = {a, t, c, g}
+    Palavra:        W = aacaagtttacaagc
+    Fator/segmento: trecho consecutivo de 'letras' (caracteres
+                    vindos do alfabeto)
+    A*:             { palavra vazia, a, c, t, g, aa, ac, ...,
+                      aaa, aac, ... }
+                    (conjunto de todas as palavras que podem ser
+                    geradas a partir do alfabeto. Definindo a ope-
+                    ração '*', multiplicação, como a concatenação
+                    de letras, temos que esse é o conjunto de todas
+                    as multiplicações possíveis)
+    palavra vazia:  1, λ ou ε, dependendo da literatura
+    w fator v:      v = v1wv2, v1, v2 ∈ A*
+                    (w é um fator de v se existem v1 e v2 ∈ A* tais
+                    que v1*w*v2 forma v)
+    
+    Outro exemplo: A = {a, b, c}
+                   W = abcabcabc
+                   f = abcabc ocorre 2 vezes em w
+    
+    PROBLEMA: Dado w ∈ A*, onde A é um alfabeto fixo, encontrar um 
+              fator 'f' de 'w' que ocorre mas de uma vez em 'w' e 'f'
+              tem comprimento máximo possível. Pode ter mais de uma
+              resposta. Ex:
+                    W = aaa = a³
+                    W = aaabbb f = aaa, f' = bbb
+    
+               i                        j
+    W: --------|#########|--------------|#########|----------
+                    f                        f
+    
+    ALgoritmo imediato da definição demora pelo menos quadrátivo em 
+    N = |w| [complexidade Ω(N²) ]. Ele, porém, pode até ser pior, pois
+    em alguns casos pode ser N³ (quando o alfateto tem apenas uma
+    letra):
+            aaaaa (verificamos 'a', 'aa', 'aaa', 'aaaa', 'aaaaa' 
+                   para cada uma deles)
+            
+            Ex: >= N/3 letras comuns para cada um dos pares (i,j)
+                f ≥ (4/9)*(N) dos pares (i,j), i < j. Isso ocorre
+                          (2) 
+                porque i, j ≤ 2*N/3, e quando pegamos todos os pares
+                (i,j) que cumprem isso, (2*N/3) <≈ 4/9*(N)
+                                        (  2  )        (2)
+                
+                O número de comparações feitas é ≥ 4/9*(N)*(N) = Ω(N³)
+                                                       (2) (3)
+            
+            Apesar disso, o algoritmo tem comprimento pelo menos Ω(N²).
+            O algoritmo trivial tem 3 laços:
+                
+                
+                for(i ...) {
+                    for(j ...) {
+                        while() {
+                            /* Para todos repetidos, supomos que 
+                               ele roda N/3 vezes. Este while serve
+                               para fazer alguma comparação.  */
+                        }
+                    }
+                }
+            
+            O comprimento f' = r. TEmos que os dois for encaixados têm
+            (N) de combinações de 'i' e 'j' e também executamos o nosso
+            (2)
+            while um máximo de 'r' fezes (r = |f|).
+    
+    Um exemplo de situação em que isso seria interessante é que se ti-
+    véssemos que fazer uma refatoração de um código de um programa 
+    grande (como um sistema) e desejamos achar trechos repetidos para
+    que eles possam ser modularizados. Nestes casos, este algoritmo 
+    nõ pode ser bom.
+    
+STRING INDEX
+-----------------------------------------------------------------------
+
+        Às vezes, temos uma coleção de dados já armazenada na memória, 
+    e temos de acessá-la várias vezes.
+        Não podemos deixar de pensar que o nosso problema acima é, 
+    senão, um problema de buscas, em que poderíamos ter uma tabela
+    de símbolos para podermos aumentar a eficiência das buscas.
+    
+    Uma primeira ideia seria a de utilir uma tabela de símbolos que
+    armazenasse todos os fatores de W. Poderíamos, então, fazer uma
+    busca, de modo que acharíamos qual o fator de maior tamanho. Isso,
+    porém, manteria a ordem ² do problema, pois teríamos C_N,2 pares
+    i e j que seriam inseridos.
+    
+    Uma segunda ideia seria fazer isso na ordem inversa, começando 
+    pelos maiores e parando ao achar uma repetição.
+    Isso ajudaria, mas o algoritmo mantém a complecidade ².
+    
+    Uma ideia um tanto quanto peculiar é armazenar uma tabela de sím-
+    bolos dos SUFIXOS (não vazios) das palavras.
+        
+        Def: w sufixo de v: v = v'w
+    
+    Em vez de armazenarmos todos os sufixos, poderíamos fazer uma ta-
+    bela de símbolos com ponteiros para cada caractere da nossa pala-
+    vra, de modo que tivéssemos o início de todos os sufixos:
+    
+    | | | | | | | ... | |      a c a a g t t t a  a  c  a  a  g  c
+     1 2 3 4 5 6       N       1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+    
+    Poderíamos implementar os fatores como sendo uma ABB, pois ela já
+    poderia nos fornecer uma busca logarítmica no pior caso. 
+    
+    Essa árvore seria útil se buscássemos não por palavras, mas por
+    trechos de palavras, pois poderíamos realizar a busca de modo 
+    que passássemos por todas as palavras e pudéssemos atingir todas
+    as 
+    
+             | aacaagtttacaagc                   | aacaagtttacaagc
+             | acaagtttacaagc                    | aagc
+             | caagtttacaagc                     | aagtttacaagc
+             | aagtttacaagc                      | acaagc
+             | agtttacaagc                 15    | acaagtttacaagc
+       15    | gtttacaagc         ↔     palavras | agc
+    palavras | tttacaagc               ordenadas | agtttacaagc
+             | ttacaagc                          | c
+             | tacaagc                           | caagc
+             | acaagc                            | caagtttacaagc
+             | caagc                             | gc
+             | aagc                              | gtttacaagc
+             | agc                               | tacaagc
+             | gc                                | ttacaagc
+             | c                                 | tttacaagc
+    
+    Se quisermos buscar buscar por uma string como acaag, podemos
+    encontrar o fator repetido em linhas consecutivas, por causa 
+    da ordenação em ordem lexicográfica.
+    
+    Os fatores repetidos ocorrerão num pedaço contíguo e poderemos
+    fazer uma análise para acharmos o maior sufixo em O(N*lg(N)*r),
+    uma prática muito boa. 
+    
+    Uma estrutura mais sofisticada possível é a chamada 'árvore de 
+    sufixos', que permite que tenhamos buscas e a resolução em O(N).

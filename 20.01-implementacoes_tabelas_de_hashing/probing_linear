@@ -1,0 +1,134 @@
+TABELAS DE ESPALHAMENTO 
+COM RESOLUÇÃO DE COLISÕES COM PROBING LINEAR/SEQUENCIAL
+
+Quando criamos tabelas de espalhamento utilizando a resolução
+de colisões com listas, temos um custo adicional de memória. Ainda
+que tenhamos APENAS 1 ponteiro para cada nódulo de lista (mais as
+cabeças), pode haver necessidade de não usar mais memória.
+
+A técnica por trás do método que apresentaremos explica o signi-
+ficado de 'probing linear', que tem a ver com 'probe' - analisar
+o endereço.
+
+    RESOLUÇÃO POR LISTAS LIGADAS
+    
+          .-------.          .-. 0     
+          |       |          | |      
+          | .--.  |          |-|      
+          | | x:--------.--> |→ → ...→ |x| → ...→  |y| → ...
+          | |y-:--------|    |-|     ^^^^^^^^^^^^^^^^^^^^
+          | '--'  |          | |        listas ligadas
+          |  ^    |          |-|      
+          '--|----'          | |      
+             N               '-' M-1     
+    
+    RESOLUÇÃO POR PROBING LINEAR
+    
+          .-------.            .-. 0     
+          |       |            | |      
+          | .--.  | h(x)=h(y)  |-|      
+          | | x:----------.--> |x| } Como o objeto 'x' já voi mapeado,
+          | |y-:----------|    |-| } olhamos para o próximo:
+          | | t:-----|         |y| }
+          | '--'  |  |         |-| } Formamos um bloco 'contíguo' de    
+          | .--.  |  |     .-> |s| } inserções
+          | |s-:-----:-----'   |-| } 
+          | '--'  |  '-------- |t| } Se houver misturas de chaves, con-
+          |       |            |-|   tinuamos ignorando mesmo assim.
+          '-------'            | |
+                               |-|
+                               | |
+                               |-|
+                               | |
+                               |-|
+                               | |
+                               '-' M-1 
+    
+    Estas tabelas são ocupadas usando ITENS, não ponteiros.
+    
+    Para inserir, procuramos a chave do elemento. Se a posição estiver
+    ocupada, continuamos avançando e inserimos se tivermos um elemento
+    com NULLitem (que é a nossa 'casa vazia' para o elemento). O vetor
+    funciona como vetor CIRCULAR.
+    
+    (Existe um análogo a estas tabelas, chamadas de 'double hashing',
+    em que em vez de ir sequencialmente, existe uma segunda função de
+    hashing, dependente da chave, que determina o quanto o pulo será).
+    
+    Para realizar uma BUSCA, precisamos procurar nos blocos contíguos
+    de memória, começando pela posição da chave, até acharmos um 
+    NULLitem. Se ele não estiver na tabela, chegamos no NULLitem, e, 
+    logo, não houve a inserção.
+    
+    Essas tabelas de símbolos têm grandes problemas: a tabela comporta
+    APENAS M elementos e, além disso, podemos ter um laço infinito se
+    ela estiver cheia, pois nossa condição de parada é NULLitem (e não
+    haverá nenhum).
+
+    FUNDAMENTAL: N < M
+    Em geral, α = N/M, o "fator de carregamento".
+    Temos 0 ≤ α < 1 sempre. Na prática, 0 ≤ α <≅  1/2
+    
+    O caso IDEAL é que tenhamos blocos pequenos. A situação ótima é
+    quando temos posições ocupadas-vazias, formando um intercalado
+    (nesse caso, fazemos APENAS 2 probes).
+    
+    O PIOR caso é quando temos um grande bloco com metade da tabela,
+    na qual a quantidade média de 'probes' é M/8 (dado que metade é
+    vazia, em apenas 50% dos casos caímos no grande bloco. Quando 
+    isso ocorre, a média é que estejamos na posição M/4, e temos de
+    percorrê-la até M/2. Logo, a média é que, para todos os elementos,
+    tenhamos de fazer M/8 elementos (dividindo os M/4 dos 50% para os
+    outros 50% vazios). Esse processo é chamado de CLUSTERIZAÇÃO.
+    
+    POSSÍVEL PROVAR:
+    Suponha que montemos uma tabela de hashing com probing sequencial
+    sob a hipótese (H) e dator de carregamento α (0 ≤ α < 1)
+    
+    (a) O valor esperado de probes em uma busca COM sucesso é
+                    ~ (1/2) * (1 + 1/(1-α))
+    (b) O valor esprado debusca SEM sucesso é
+                    ~ (1/2) * (1 + 1/(1-α)²)
+    
+    Ex: Para α = 1/2: 3/2 com sucesso, 5/2 sem sucesso
+    Isso mostra que, no caso MÉDIO, o algoritmo do probing linear
+    é muito bom. α's menores não necessariamento são bons, pois
+    a diferença não trará grandes perdas.
+    
+    Quando os itens são muito grandes, podemos usar ponteiros no
+    lugar de guardar os itens. Para que mantenhamos uma proporção
+    α = 1/2, temos que ter 2*N ponteiros. Nesse quesito, a econo-
+    mia é maior, de aproximadamente 50%, pois para inserir todos
+    na tabela de hash com solução por encadeamento, teremos no 
+    máximo 2 ponteiros para cada um. Para o 'probing linear', po-
+    tém, teremos 1 ponteiro para cada um.
+    
+    A desvantagem continua, porém, dado que nosso sistema quebra
+    quando houver mais que N elementos, a solução para a tabela 
+    é fazer também TABELAS DINÂMICAS.
+
+ESTATÍSTICAS
+    
+    Para a Bíblia de KJ, do projeto Gutenberg, temos:
+    824.150 elementos válidos e 34.059 distintos
+    (considerando como PALAVRA um elemento que não contém espaços).
+    
+    max = 50.000
+    → M = 131.071 (= prime_m(100.000))
+    → α = 34.059 / 131.071 ≈ 26%
+    
+    # probes por palavra lida nas buscas ≈ 1.06
+    --> busca sem sucesso ≈ 1.38
+    --> busca com sucesso ≈ 1.05
+    
+    Ao analisar as palavras, a função 'hashU'' pode dar 
+    overflow. Para evitarmos isso, é ideal que utilizemos
+    a função hash_Knuth, de protótipo:
+    
+                long hash_Knuth(char *t);
+    
+    Para usarmos ele, precisamos utilizar um #define para
+    fazer #define hash(v,m) hash_Knuth(v) % M.
+    
+    A função hash(v,M) é um protótipo geral. Os testes da 
+    página foram feitos usando hashU e hash_Knuth.

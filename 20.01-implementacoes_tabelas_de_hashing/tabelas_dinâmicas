@@ -1,0 +1,43 @@
+O desempenho das tabelas de símbolos é proporcional à λ. Se λ for
+CONSTANTE, então teremos que a tabela será O(λ) = O(1). 
+
+Para, porém, mantermos esse desempenho, precisamos ter que a pro-
+porção λ = M/N deve se manter constante.
+
+Quando M fica "pequeno" em relação a N, podemos dobrar M:
+→ função de hashing deve ser alterada;
+→ objetos presentes DEVEM SER REINSERIDOS;
+
+Porém, para que possamos criar TABELAS DINÂMICAS, teremos de fazer
+alterações nas funções de hashing. Para tanto, em geral, deveremos
+aumentar o vetor relacionado, dobrando-o. Mas, a análise amortizada
+dele, temos que esta é uma prática eficiente. 
+
+A ideia por trás das tabelas dinâmicas é usar o probing_linear para
+que possamos DOBRAR o tamanho da tabela. A ideia é DOBRAR o tamanho
+do vetor e, ao fazer isso, REINSERIR todos. O mesmo poderia ser feito
+para a solução por listas encadeadas.
+
+Para criar estas tabelas, se α > 1/2, então devemos DOBRAR o tamanho
+da tabela, e o tamanho do α ficará em 1/4. Se α ficar menor que 1/8,
+o ideal é que reduzamos o tamanho da tabela ao meio. Isso é muito 
+útil porque entre 1/8 e 1/4, o número de probes para as buscas é 
+bem pequeno.
+
+            |       |              |       |
+            |       |              |       |
+            |       |              |       |
+            |       |   α > 1/2    |       |
+            |       | -----------> |       |
+            |       |     x 2      |       |
+            |       |              |       |
+            |       |              |       |
+                                   |       |
+            |       |              |       |
+            |       |              |       |
+            |       |   α < 1/2    |       |
+            |       | <----------- |       |
+            |       |     / 2      |       |
+            |       |              |       |
+            |       |              |       |
+            |       |

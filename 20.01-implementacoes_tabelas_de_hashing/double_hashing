@@ -1,0 +1,34 @@
+DOUBLE HASHING
+
+Podemos utilizar, em vez o avanço de 1 a 1, outra função de hashing
+para que realizemos funções de 'salto'. Para fazermos a função h'(v)
+que a faz, podemos realizar algo como h'(v) = (% 97) + 1 ≠ 0 sempre.
+
+Ao usar o double hashing, transformamos a função em: 
+    
+    Probing linear       x  Double Hashing   
+            
+    1/2 * (1 + 1/(1-α))  →  1/α * ln(1/(1/α))
+    linear                  logarítmico
+    
+    1/2 * (1 + 1/(1+α)²) →  1/(1-α)
+    quadrático              linear
+    
+    
+        |-------|              |-------|
+     .--|       |           .--|       |
+  +1 '->|-------|           |  |-------|
+     .--|       |           |  |       |
+  +1 '->|-------|     h'(v) |  |-------|
+        |       |           |  |       |
+        |-------|           |  |-------|
+        |       |           |  |       |
+        |-------|           '->|-------|
+        |       |           .--|       |
+        |-------|           |  |-------|
+        |       |           |  |       |
+        |-------|     h'(v) |  |-------|
+        |       |           |  |       |
+        |-------|           |  |-------|
+        |       |           |  |       |
+        |-------|           '->|-------|

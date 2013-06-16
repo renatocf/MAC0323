@@ -1,0 +1,74 @@
+TABELAS DE HASHING
+
+Mistura as melhores características da tabela de símbolos que podem 
+crescer muito ocm as tabelas de símbolos com vetores indexados por
+chaves.
+
+                .-----------.           .----.
+                |           |     h     |    | 0
+                |           | --------> |----|
+                |           |           |    | 1
+                |           |           |----|
+                |           |        .->|h(x)| ...
+                |        X |---------'  |----|
+                '-----------'           |    | M-1
+                      U                 '----' 
+        
+        h: U  →  {0,1,...,M-1}
+           x |-> h(x)
+        
+        h: função de hashing
+        colisão: x ≠ y e h(x) = h(y)
+                 Sempre ocorre se N (número de elementos) > M,
+                 pelo princípio da casa dos pombos.
+        
+IMPLEMENTAÇÃO DE TABELAS DE ESPALHAMENTO 
+COM RESOLUÇÃO DE COLISÕES POR ENCADEAMENTO
+
+          .-------.          .-. 0     
+          |       |          | |      
+          | .--.  |          |-|      
+          | | x:--------.--> |→ → ...→ |x| → ...→  |y| → ...
+          | |y-:--------|    |-|     ^^^^^^^^^^^^^^^^^^^^
+          | '--'  |          | |        listas ligadas
+          |  ^    |          |-|      
+          '--|----'          | |      
+             N               '-' M-1     
+
+    N objetos   } número médio de objetos = soma # objetos = N/M
+    M endereços } em cada uma das listas      nas listas
+                                            --------------
+                                                  M
+    
+    Em geral, queremos que CADA LISTA tenha aproximadamente N/M
+    objetos. Em gera, escolhemos 'M' de forma que N/M é uma cons-
+    tante não muito grande. (M deve ser um primo, para evitarmos
+    viés com múltiplos dos números).
+    
+    Em geral, precisamos, então, escolher nosso tamanho com base
+    em N/M, o número de elementos que queremos, em média, no nosso
+    vetor do hash. Uma boa quantidade, para isso, é 1/10 de N, que
+    faz com que haja, em média, 10 elementos em cada lista - o que,
+    se a função de hash for boa, não ocorrerá no geral.
+    
+    Exemplo numérico:
+    λ = N/M = 20
+    Qual é a probabilidade da lsta ter k = 40 elementos?
+    
+    Respondemos esta pergunta sob a hipótese de análise da tabela
+    de hashing.
+    (H) h(x) é uma v.a. uniformemente distribuída em 0,1,...,M-1 e
+        essas v.a. são independentes. (H ≡ hipótese).
+        
+        P(lista 'i' ter 'k' objetos)
+        = P(B ~ (N,1/M) - k) = (N) * (1/M)^k * (1 - 1/M)^(N-k)
+                               (K) 
+        ≈ P(Po(λ) = k) = (e^(-λ) * λ^k)/K!
+        
+        Para λ = 20 (nossa esperança da Binomial n*p) e k = 40?
+        P(Po(20) = 40) = 0.0006%
+        
+        Mesmo para uma lista de 40 elementos (o que é muito difícil
+        de acontecer) ainda seria rápido percorrer a lista. Ainda 
+        assim, quando o programa roda por muito tempo, a probabili-
+        dade da ocorrência é total.
