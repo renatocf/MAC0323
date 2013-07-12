@@ -1,0 +1,39 @@
+        :         :
+S: |----:---------:----------------------|  |s| = n
+        |---------:----|
+        r      ∫  :
+                  |---------------|
+                  s       ∫ 
+
+Ao pegar todos os sufixos da palavra e, em seguida, ordená-los, 
+criamos o vetor de sufixos, que de forma muito prática corrige o 
+problema de intervalos maximais:
+
+mississippi  |  i           
+ississippi   |  ippi        
+ssissippi    |  issippi     
+sissippi     |  ississippi  
+issippi      |  mississippi 
+ssippi       |  pi          
+sippi        |  ppi         
+ippi         |  sippi       
+ppi          |  sissippi    
+pi           |  ssippi      
+i            |  ssissippi   
+
+Observando duas a duas as sequências mais compridas, temos que 
+os MAIORES PREFIXOS de cada sufixo 2 a 2.
+
+Para montarmos a tabela, a forma mais eficiente para agir seria
+criar um VETOR DE PONTEIROS para caracteres ou um vetor de inteiros
+(simplesmente) para representar os sufixos. Em seguida, ordenamos
+os ponteiros (isso é melhor porque para sequências GRANDES teríamos
+problemas com a memória).
+
+O algoritmo é linear para montar (conforme acima) e para percorrer
+(procurando o maior prefixo). O mais custoso, nesse caso, é ordenar
+(usando o qsort, a solução pode demorar até 1.5 min para o C. elegans).
+
+Usando a estrutura dos vetores, é possível fazer uma BUSCA BINÁRIA 
+dentro do vetor. Isso é excelente, pois quando formos fazer um número
+razoável de buscas esse método permite fazê-lo de forma muito rápida.

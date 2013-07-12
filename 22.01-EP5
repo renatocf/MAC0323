@@ -1,0 +1,83 @@
+EP5 - EXPLICAÇÃO
+
+s |---------------|---|---------------------|
+                    f
+t |--------|---|-----------------|---|------|
+             f                     f
+
+cromossomo III, C. elegans
+~ 14MB (14*10\^6 chars, C,T,G,A)
+
+Σ αlfabeto; σ pertence Σ letras
+
+Σ* = {palavras s/ Σ}
+   = {λ} U { σ: σ ∈ Σ } U {σσ': σ1σ' ∈ Σ } U ...
+     (λ: palavra vazia)
+
+Ex: Σ = {A,T,C,G}
+    Σ* = {λ, A, C, T, G, AA, AC, AT, AG, CA, CC< CG, CT, ..., AAA, ...}
+       = Σ^0 U Σ^1 U Σ^2 U ...
+         ↓            ↓
+        {λ}     {AA, AC, .., TT}
+
+f FATOR de s: s = s1 ∫ s2, s1,s2 ∈ Σ*
+
+                    s |----------|---|-----------|
+                       <-- s1 -->  ∫  <-- s2 --->
+
+Fat(s) = {f: f fator de s}
+
+Fatores comuns de s e t (é possível listar):
+* todos os membros de Fat(s) ∩ Fat(t);
+* Interessante: encontrar um (ou todos) os elementos de comprimento
+  máximo de Fat(s) ∩ Fat(t).
+
+Suponha f ∈ Fat(s) ∩ Fat(t).
+Uma REPETIÇÃO de f em s e t é um par de inteiros (i,j) t.q:
+        s = s1 ∫ s2 e t = t1 ∫ t2 e |s1| = i-1 |t1| = j-1
+    
+    s |------|---|σ-----------|
+         s1    ∫       s2
+    t |-------|---|τ-----------|
+         t1     ∫       t2
+    
+Uma repetição (i,j) é MAXIMAL À DIREITA se as 1ªs letras de s2 e t2 
+são diferentes (no ex: σ ≠ τ) e é MAXIMAL À ESQUERDA (análogo).
+    
+      .........                                       .........   
+    s : |---|-:---------|---|        s |---|----------:-|---| :
+      :   ∫   :           ∫              ∫            :   ∫   :
+      :       '........                      .........'       :
+    t : |-------|---|-:-----|        t |-----:-|---|-:-----|  :
+      :           ∫   :                      :   ∫   :        :
+      '''''''''''''''''                      ''''''''''''''''''
+        maximal à esquerda                maximal à direita
+
+REPETIÇÂO SUPERMAXIMAL: máximo à esquerda e à direita
+                
+                s |--------σ1|---|σ2--------|
+                               ∫
+                t |----------τ1|---|τ2----------|
+                                 ∫ 
+                                
+                        σ1 ≠ τ1 e σ2 ≠ τ2 
+
+∫ ∈ Fat(s) ∩ Fat(t) é MAXIMAL se EXISTE uma reatição de f que é
+maximal. 
+
+PROBLEMA: listar todos os fatores comuns maximais de s e t.
+
+                ---                     ---
+Ex: s = abcbccbcbcccba    t = accbaacbacbbccacbb
+         ''---  ''++++         ++++     ''
+    
+∫ = bc  rep.(2,12) é maximal à esquerda.
+        rep.(9,12) é maximal à esquerda.
+
+Um fator comum de ∫ de s e t é SUPERMAXIMAL se ∫ não for fator 
+próprio de algum ∫ ∈ Fat(s) ∩ Fat(t).
+
+[Fator ptóprio: ∫ ∈ Fat(s) é fator próprio de ∫' se ∫ ≠ λ, ∫ ≠ ∫']
+
+No exemplo acima, 'ccba' e 'bcc' são fatores supermaximais de s e t
+('bc' não é porque é fator de 'bcc').
