@@ -39,6 +39,7 @@ char *GetLine()
                 free(line);
                 line = nline;
             }
+            line[n++] = ch;
         }
         
         if(n == 0 && ch == EOF) 
