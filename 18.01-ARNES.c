@@ -285,7 +285,7 @@ static link mvRedR(link h)
 
 
 /* Pega uma árvore com 3-nó e 4-nó
- * e a transforma de volra numa ARNE
+ * e a transforma de volta numa ARNE
  * correta ('balanceando' os ponteiros).
  * E chamada, durante as remoções, pa-
  * ra fazer as 'correções' dos estra-
